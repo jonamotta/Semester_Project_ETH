@@ -82,6 +82,9 @@ Bool_t mass_test::Process(Long64_t entry)
    mu.SetPtEtaPhiM(*mu_pt,*mu_eta,*mu_phi,mu_mass);
    nu.SetPtEtaPhiM(*nu_pt,*nu_eta,*nu_phi,nu_mass);
    jpsi.SetPtEtaPhiM(*jpsi_pt,*jpsi_eta,*jpsi_phi,jpsi_mass);
+   // we set a TLorentzVector considering the case in which all the Bc are produced in the on-shell limit
+   // before decaying
+   Bc_onshell.SetPtEtaPhiM(*bc_pt,*bc_eta,*bc_phi,Bc_mass);
    // calculate final state TLorentzVectors
    final_state = nu + mu + jpsi;
    nuless_final_state = mu + jpsi;
@@ -93,6 +96,7 @@ Bool_t mass_test::Process(Long64_t entry)
 
    complete_Fstate->Fill(final_state.M(),final_state.M() - *bc_mass);
    nuless_Fstate->Fill(nuless_final_state.M(),nuless_final_state.M() - *bc_mass);
+   onshell_test->Fill(final_state.M(),final_state.M() - Bc_onshell.M(),nuless_final_state.M(),nuless_final_state.M() - Bc_onshell.M());
 
    return kTRUE;
 }

@@ -70,12 +70,14 @@ public :
    // TTree
    TNtuple *complete_Fstate = new TNtuple("complete_final_state","complete_final_state","final_state_mass:mass_diff");
    TNtuple *nuless_Fstate = new TNtuple("nuless_final_state","nuless_final_state","nuless_final_mass:nuless_mass_diff");
+   TNtuple *onshell_test = new TNtuple("onshell_test","onshell_test","final_state_mass:mass_diff:nuless_final_mass:nuless_mass_diff");
 
    // watch to control the running time of the program
    TStopwatch watch;
 
    // vectors we use for the analysis
    TLorentzVector Bc, mu, nu, jpsi;
+   TLorentzVector Bc_onshell;
    TLorentzVector final_state;
    TLorentzVector nuless_final_state;
 
